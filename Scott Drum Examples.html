@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title></title>
+<meta name="Generator" content="Cocoa HTML Writer">
+<meta name="CocoaVersion" content="1138.51">
+<style type="text/css">
+p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'DejaVu Sans Mono'; color: #5f5f5f}
+p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'DejaVu Sans Mono'; color: #000000}
+p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'DejaVu Sans Mono'; color: #000000; min-height: 15.0px}
+p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'DejaVu Sans Mono'; color: #1428b9}
+p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'DejaVu Sans Mono'; color: #950606}
+p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'DejaVu Sans Mono'; color: #c62bba}
+p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'DejaVu Sans Mono'; color: #c62bba}
+span.s1 {color: #1428b9}
+span.s2 {color: #5f5f5f}
+span.s3 {color: #7d1875}
+span.s4 {color: #1e39f6}
+span.s5 {color: #c62bba}
+span.s6 {color: #000000}
+span.s7 {color: #950606}
+span.s8 {color: #ff7826}
+span.s9 {color: #474ec4}
+span.s10 {font: 13.0px 'DejaVu Sans Mono'; color: #000000}
+span.s11 {font: 13.0px 'DejaVu Sans Mono'; color: #5f5f5f}
+span.s12 {font: 13.0px 'DejaVu Sans Mono'; color: #950606}
+span.s13 {font: 12.0px 'DejaVu Sans Mono'; color: #c62bba}
+span.Apple-tab-span {white-space:pre}
+</style>
+</head>
+<body>
+<p class="p1">(</p>
+<p class="p2"><span class="s1">SynthDef</span><span class="s2">(</span><span class="s3">"drum"</span><span class="s2">,</span> <span class="s2">{</span> <span class="s4">arg</span> out<span class="s2">,</span> buffer<span class="s2">,</span> sustain=<span class="s5">1</span><span class="s2">,</span> amp=<span class="s5">1</span><span class="s2">,</span> rate=<span class="s5">0.8</span><span class="s2">,</span> pan<span class="s2">;</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="s4">var</span> sig<span class="s2">;</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span>sig = <span class="s1">PlayBuf</span><span class="s2">.</span>ar<span class="s2">(</span><span class="s5">1</span><span class="s2">,</span> buffer<span class="s2">,</span> rate:rate<span class="s2">);</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span>sig = <span class="s1">GVerb</span><span class="s2">.</span>ar<span class="s2">(</span>sig<span class="s2">);</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span>sig = amp * <span class="s1">HPF</span><span class="s2">.</span>ar<span class="s2">(</span>sig<span class="s2">,</span> <span class="s5">30</span><span class="s2">);</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="s1">Line</span><span class="s2">.</span>kr<span class="s2">(</span>dur:<span class="s5">8</span><span class="s2">,</span> doneAction:<span class="s5">2</span><span class="s2">);</span></p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="s1">Out</span><span class="s2">.</span>ar<span class="s2">(</span><span class="s5">0</span><span class="s2">,</span> sig<span class="s2">);</span></p>
+<p class="p1">}).<span class="s6">add</span>;</p>
+<p class="p1">)</p>
+<p class="p3"><br></p>
+<p class="p2">s<span class="s2">.</span>boot<span class="s2">;</span></p>
+<p class="p3"><br></p>
+<p class="p2">d = <span class="s2">(</span> <span class="s2">);</span></p>
+<p class="p4"><span class="s6">d</span><span class="s2">[</span><span class="s7">\one</span><span class="s2">]</span><span class="s6"> = </span>Pbind<span class="s2">(</span></p>
+<p class="p5"><span class="s6"><span class="Apple-tab-span">	</span></span>\instrument<span class="s2">,</span><span class="s6"> </span><span class="s1">Pseq</span><span class="s2">([</span>\drum<span class="s2">],</span><span class="s6"> </span><span class="s5">1</span><span class="s2">),</span></p>
+<p class="p5"><span class="s6"><span class="Apple-tab-span">	</span></span>\buffer<span class="s2">,</span><span class="s6"> </span><span class="s8">~s</span><span class="s2">[</span><span class="s5">3</span><span class="s2">],</span></p>
+<p class="p5"><span class="s6"><span class="Apple-tab-span">	</span></span>\amp<span class="s2">,</span><span class="s6"> </span><span class="s5">0.5</span><span class="s2">,</span><span class="s6"><span class="Apple-converted-space"> </span></span></p>
+<p class="p5"><span class="s6"><span class="Apple-tab-span">	</span></span>\rate<span class="s2">,</span><span class="s6"> </span><span class="s5">0.8</span></p>
+<p class="p1">);</p>
+<p class="p3"><br></p>
+<p class="p4"><span class="s6">d</span><span class="s2">[</span><span class="s7">\two</span><span class="s2">]</span><span class="s6"> = </span>Pbind<span class="s2">(</span></p>
+<p class="p5"><span class="s6"><span class="Apple-tab-span">	</span></span>\instrument<span class="s2">,</span><span class="s6"> </span><span class="s1">Pseq</span><span class="s2">([</span>\drum<span class="s2">],</span><span class="s6"> </span><span class="s9">inf</span><span class="s2">),</span></p>
+<p class="p5"><span class="s6"><span class="Apple-tab-span">	</span></span>\buffer<span class="s2">,</span><span class="s6"> </span><span class="s8">~s</span><span class="s2">[</span><span class="s5">6</span><span class="s2">],</span></p>
+<p class="p5"><span class="s6"><span class="Apple-tab-span">	</span></span>\amp<span class="s2">,</span><span class="s6"> </span><span class="s5">0.3</span><span class="s2">,</span></p>
+<p class="p6"><span class="s6"><span class="Apple-tab-span">	</span></span><span class="s7">\dur</span><span class="s2">,</span><span class="s6"> </span><span class="s1">Pseq</span><span class="s2">([</span>1.6<span class="s2">,</span><span class="s6"> </span>1<span class="s2">,</span><span class="s6"> </span>0.6<span class="s2">,</span><span class="s6"> </span>0.3<span class="s2">,</span><span class="s6"> </span>0.1<span class="s2">],</span><span class="s6"> </span>1<span class="s2">),</span></p>
+<p class="p5"><span class="s6"><span class="Apple-tab-span">	</span></span>\rate<span class="s2">,</span><span class="s6"> </span><span class="s5">1.3</span></p>
+<p class="p1">);</p>
+<p class="p5"><span class="s6">d</span><span class="s2">[</span>\three<span class="s2">]</span><span class="s6"> = </span><span class="s1">Pbind</span><span class="s2">(</span></p>
+<p class="p5"><span class="s6"><span class="Apple-tab-span">	</span></span>\instrument<span class="s2">,</span><span class="s6"> </span><span class="s1">Pseq</span><span class="s2">([</span>\drum<span class="s2">],</span><span class="s6"> </span><span class="s9">inf</span><span class="s2">),</span></p>
+<p class="p5"><span class="s6"><span class="Apple-tab-span">	</span></span>\buffer<span class="s2">,</span><span class="s6"> </span><span class="s8">~s</span><span class="s2">[</span><span class="s5">2</span><span class="s2">],</span></p>
+<p class="p5"><span class="s6"><span class="Apple-tab-span">	</span></span>\amp<span class="s2">,</span><span class="s6"> </span><span class="s5">0.3</span><span class="s2">,</span></p>
+<p class="p6"><span class="s6"><span class="Apple-tab-span">	</span></span><span class="s7">\dur</span><span class="s2">,</span><span class="s6"> </span><span class="s1">Pseq</span><span class="s2">([</span>0.2<span class="s2">,</span><span class="s6"> </span>0.2<span class="s2">,</span><span class="s6"> </span>0.2<span class="s2">],</span><span class="s6"> </span>1<span class="s2">),</span></p>
+<p class="p5"><span class="s6"><span class="Apple-tab-span">	</span></span>\rate<span class="s2">,</span><span class="s6"> </span><span class="s5">0.8</span></p>
+<p class="p1">);</p>
+<p class="p3"><br></p>
+<p class="p6"><span class="s6">l = `</span><span class="s2">[</span>2.2<span class="s2">,</span><span class="s6"> </span>2.2<span class="s2">,</span><span class="s6"> </span>2.2<span class="s2">,</span><span class="s6"> </span>2.2<span class="s2">];</span></p>
+<p class="p6"><span class="s6">l</span><span class="s2">.</span><span class="s6">set</span><span class="s2">([</span>1.2<span class="s2">,</span><span class="s6"> </span>1.2<span class="s2">,</span><span class="s6"> </span>1.2<span class="s2">,</span><span class="s6"> </span>1.2<span class="s2">]);</span></p>
+<p class="p6"><span class="s6">l</span><span class="s2">.</span><span class="s6">set</span><span class="s2">([</span>2.2<span class="s2">,</span><span class="s6"> </span>2.2<span class="s2">,</span><span class="s6"> </span>2.2<span class="s2">,</span><span class="s6"> </span>2.2<span class="s2">]);</span></p>
+<p class="p6"><span class="s6">l</span><span class="s2">.</span><span class="s6">set</span><span class="s2">([</span>2.2<span class="s2">,</span><span class="s6"> </span>0.2<span class="s2">,</span><span class="s6"> </span>0.2<span class="s2">,</span><span class="s6"> </span>0.2<span class="s2">,</span><span class="s6"> </span>0.2<span class="s2">,</span><span class="s6"> </span>0.2<span class="s2">]);</span></p>
+<p class="p3"><br></p>
+<p class="p4">Ppar<span class="s2">([</span></p>
+<p class="p4"><span class="s6"><span class="Apple-tab-span">	</span></span>Pspawn<span class="s2">(</span>Pbind<span class="s2">(</span></p>
+<p class="p5"><span class="s6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>\pattern<span class="s2">,</span><span class="s6"> </span><span class="s1">Pseq</span><span class="s2">([</span>\one<span class="s2">,</span><span class="s6"> </span>\one<span class="s2">,</span><span class="s6"> </span>\one<span class="s2">,</span><span class="s6"> </span>\two<span class="s2">,</span><span class="s6"> </span>\three<span class="s2">],</span><span class="s6"> </span><span class="s9">inf</span><span class="s2">),</span></p>
+<p class="p5"><span class="s6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>\delta<span class="s2">,</span><span class="s6"> </span><span class="s1">Pref</span><span class="s2">(</span><span class="s6">l</span><span class="s2">,</span><span class="s6"> </span><span class="s9">inf</span><span class="s2">),</span></p>
+<p class="p5"><span class="s6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>\method<span class="s2">,</span><span class="s6"> </span>\par</p>
+<p class="p2"><span class="Apple-tab-span">	</span><span class="s2">),</span> <span class="s2">(</span>dict: d<span class="s2">));</span></p>
+<p class="p2"><span class="s2">]).</span>play</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<p class="p4"><span class="s6">x = </span>PbindProxy<span class="s2">.</span><span class="s6">new</span><span class="s2">;</span></p>
+<p class="p5"><span class="s6">x</span><span class="s2">.</span><span class="s6">set</span><span class="s2">(</span>\instrument<span class="s2">,</span><span class="s6"> </span>\drum<span class="s2">);</span></p>
+<p class="p3"><br></p>
+<p class="p2">x<span class="s2">.</span>set<span class="s2">(</span><span class="s7">\amp</span><span class="s2">,</span> <span class="s5">0.5</span><span class="s2">);</span></p>
+<p class="p5"><span class="s6">x</span><span class="s2">.</span><span class="s6">set</span><span class="s2">(</span>\degree<span class="s2">,</span><span class="s6"> </span><span class="s5">0.5</span><span class="s2">);</span></p>
+<p class="p7"><span class="s10">x</span><span class="s11">.</span><span class="s10">set</span><span class="s11">(</span><span class="s12">\dur</span><span class="s11">,</span><span class="s10"> </span><span class="s1">Pseq</span><span class="s2">([</span>0.2<span class="s2">,</span><span class="s6"> </span>0.2<span class="s2">,</span><span class="s6"> </span>0.2<span class="s2">,</span><span class="s6"> </span>0.2<span class="s2">,</span><span class="s6"> </span>0.2<span class="s2">,</span><span class="s6"> </span>3.2<span class="s2">],</span><span class="s6"> </span><span class="s9">inf</span><span class="s2">)</span><span class="s11">);</span></p>
+<p class="p1"><span class="s6">x</span>.<span class="s6">set</span>(<span class="s7">\buffer</span>,<span class="s6"> </span><span class="s1">Pseq</span>([<span class="s6"> </span><span class="s8">~s</span>[<span class="s5">3</span>],<span class="s6"> </span><span class="s8">~s</span>[<span class="s5">3</span>],<span class="s6"> </span><span class="s8">~s</span>[<span class="s5">3</span>],<span class="s6"> </span><span class="s8">~s</span>[<span class="s5">3</span>],<span class="s6"> </span><span class="s8">~s</span>[<span class="s5">3</span>],<span class="s6"> </span><span class="s8">~s</span>[<span class="s5">6</span>]<span class="s6"> </span>],<span class="s6"> </span><span class="s9">inf</span>));</p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<p class="p4"><span class="s6">y = </span>PbindProxy<span class="s2">.</span><span class="s6">new</span><span class="s2">;</span></p>
+<p class="p5"><span class="s6">y</span><span class="s2">.</span><span class="s6">set</span><span class="s2">(</span>\instrument<span class="s2">,</span><span class="s6"> </span>\drum<span class="s2">);</span></p>
+<p class="p3"><br></p>
+<p class="p5"><span class="s6">y</span><span class="s2">.</span><span class="s6">set</span><span class="s2">(</span>\degree<span class="s2">,</span><span class="s6"> </span><span class="s5">0.5</span><span class="s2">);</span></p>
+<p class="p2">y<span class="s2">.</span>set<span class="s2">(</span><span class="s7">\dur</span><span class="s2">,</span> <span class="s13">0.2</span><span class="s2">);</span></p>
+<p class="p2">y<span class="s2">.</span>set<span class="s2">(</span><span class="s7">\amp</span><span class="s2">,</span> <span class="s5">0.03</span><span class="s2">);</span></p>
+<p class="p5"><span class="s6">y</span><span class="s2">.</span><span class="s6">set</span><span class="s2">(</span>\buffer<span class="s2">,</span><span class="s6"> </span><span class="s8">~s</span><span class="s2">[</span><span class="s5">5</span><span class="s2">]);</span></p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<p class="p2"><span class="s1">Pbus</span><span class="s2">([</span>x<span class="s2">,</span> y<span class="s2">]).</span>play</p>
+</body>
+</html>
