@@ -11,7 +11,7 @@
 	sig = \cf4 PlayBuf\cf2 .\cf3 ar\cf2 (\cf7 1\cf2 ,\cf3  buffer\cf2 ,\cf3  rate:rate\cf2 );\cf3 \
 	sig = \cf4 GVerb\cf2 .\cf3 ar\cf2 (\cf3 sig\cf2 );\cf3 \
 	sig = amp * \cf4 HPF\cf2 .\cf3 ar\cf2 (\cf3 sig\cf2 ,\cf3  \cf7 30\cf2 );\cf3 \
-	\cf4 Line\cf2 .\cf3 kr\cf2 (\cf3 dur:\cf7 8\cf2 );\cf3 \
+	\cf4 Line\cf2 .\cf3 kr\cf2 (\cf3 dur:\cf7 8\cf2 ,\cf3  doneAction:\cf7 2\cf2 );\cf3 \
 	\cf4 Out\cf2 .\cf3 ar\cf2 (\cf7 0\cf2 ,\cf3  sig\cf2 );\cf3 \
 \cf2 \}).\cf3 add\cf2 ;\cf3 \
 \cf2 )\cf3 \
@@ -29,16 +29,29 @@ d\cf2 [\cf8 \\two\cf2 ]\cf3  = \cf4 Pbind\cf2 (\cf3 \
 	\cf8 \\instrument\cf2 ,\cf3  \cf4 Pseq\cf2 ([\cf8 \\drum\cf2 ],\cf3  \cf10 inf\cf2 ),\cf3 \
 	\cf8 \\buffer\cf2 ,\cf3  \cf9 ~s\cf2 [\cf7 6\cf2 ],\cf3 \
 	\cf8 \\amp\cf2 ,\cf3  \cf7 0.3\cf2 ,\cf3 \
-	\cf8 \\dur\cf2 ,\cf3  \cf4 Pseq\cf2 ([\cf7 2.2\cf2 ,\cf3  \cf7 0.3\cf2 ,\cf3  \cf7 0.2\cf2 ,\cf3  \cf7 0.1\cf2 ,\cf3  \cf7 0.05\cf2 ],\cf3  \cf7 1\cf2 ),\cf3 \
+	\cf8 \\dur\cf2 ,\cf3  \cf4 Pseq\cf2 ([\cf7 1.6\cf2 ,\cf3  \cf7 1\cf2 ,\cf3  \cf7 0.6\cf2 ,\cf3  \cf7 0.3\cf2 ,\cf3  \cf7 0.1\cf2 ],\cf3  \cf7 1\cf2 ),\cf3 \
 	\cf8 \\rate\cf2 ,\cf3  \cf7 1.3\cf3 \
 \cf2 );\cf3 \
+d\cf2 [\cf8 \\three\cf2 ]\cf3  = \cf4 Pbind\cf2 (\cf3 \
+	\cf8 \\instrument\cf2 ,\cf3  \cf4 Pseq\cf2 ([\cf8 \\drum\cf2 ],\cf3  \cf10 inf\cf2 ),\cf3 \
+	\cf8 \\buffer\cf2 ,\cf3  \cf9 ~s\cf2 [\cf7 2\cf2 ],\cf3 \
+	\cf8 \\amp\cf2 ,\cf3  \cf7 0.3\cf2 ,\cf3 \
+	\cf8 \\dur\cf2 ,\cf3  \cf4 Pseq\cf2 ([\cf7 0.2\cf2 ,\cf3  \cf7 0.2\cf2 ,\cf3  \cf7 0.2\cf2 ],\cf3  \cf7 1\cf2 ),\cf3 \
+	\cf8 \\rate\cf2 ,\cf3  \cf7 0.8\cf3 \
+\cf2 );\cf3 \
 \
-p = \cf4 Pspawn\cf2 (\cf4 Pbind\cf2 (\cf3 \
-	\cf8 \\pattern\cf2 ,\cf3  \cf4 Pseq\cf2 ([\cf8 \\one\cf2 ,\cf3  \cf8 \\one\cf2 ,\cf3  \cf8 \\one\cf2 ,\cf3  \cf8 \\two\cf2 ],\cf3  \cf10 inf\cf2 ),\cf3 \
-	\cf8 \\delta\cf2 ,\cf3  \cf4 Pseq\cf2 ([\cf7 2.2\cf2 ,\cf3  \cf7 2.2\cf2 ,\cf3  \cf7 2.2\cf2 ,\cf3  \cf7 2.2\cf2 ],\cf3  \cf10 inf\cf2 ),\cf3 \
-	\cf8 \\method\cf2 ,\cf3  \cf8 \\par\cf3 \
-\cf2 ),\cf3  \cf2 (\cf3 dict: d\cf2 ));\cf3 \
-p\cf2 .\cf3 play\cf2 ;\cf3 \
+l = `\cf2 [\cf7 2.2\cf2 ,\cf3  \cf7 2.2\cf2 ,\cf3  \cf7 2.2\cf2 ,\cf3  \cf7 2.2\cf2 ];\cf3 \
+l\cf2 .\cf3 set\cf2 ([\cf7 1.2\cf2 ,\cf3  \cf7 1.2\cf2 ,\cf3  \cf7 1.2\cf2 ,\cf3  \cf7 1.2\cf2 ]);\cf3 \
+l\cf2 .\cf3 set\cf2 ([\cf7 2.2\cf2 ,\cf3  \cf7 2.2\cf2 ,\cf3  \cf7 2.2\cf2 ,\cf3  \cf7 2.2\cf2 ]);\cf3 \
+l\cf2 .\cf3 set\cf2 ([\cf7 2.2\cf2 ,\cf3  \cf7 0.2\cf2 ,\cf3  \cf7 0.2\cf2 ,\cf3  \cf7 0.2\cf2 ,\cf3  \cf7 0.2\cf2 ,\cf3  \cf7 0.2\cf2 ]);\cf3 \
+\
+\cf4 Ppar\cf2 ([\cf3 \
+	\cf4 Pspawn\cf2 (\cf4 Pbind\cf2 (\cf3 \
+		\cf8 \\pattern\cf2 ,\cf3  \cf4 Pseq\cf2 ([\cf8 \\one\cf2 ,\cf3  \cf8 \\one\cf2 ,\cf3  \cf8 \\one\cf2 ,\cf3  \cf8 \\two\cf2 ,\cf3  \cf8 \\three\cf2 ],\cf3  \cf10 inf\cf2 ),\cf3 \
+		\cf8 \\delta\cf2 ,\cf3  \cf4 Pref\cf2 (\cf3 l\cf2 ,\cf3  \cf10 inf\cf2 ),\cf3 \
+		\cf8 \\method\cf2 ,\cf3  \cf8 \\par\cf3 \
+	\cf2 ),\cf3  \cf2 (\cf3 dict: d\cf2 ));\cf3 \
+\cf2 ]).\cf3 play\
 \
 \
 \
