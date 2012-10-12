@@ -10,15 +10,15 @@
 p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'DejaVu Sans Mono'; color: #000000; min-height: 14.0px}
 p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'DejaVu Sans Mono'; color: #5f5f5f}
 p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'DejaVu Sans Mono'; color: #000000}
-p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'DejaVu Sans Mono'; color: #1428b9}
+p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'DejaVu Sans Mono'; color: #950606}
 p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'DejaVu Sans Mono'; color: #1e39f6}
 span.s1 {color: #1e39f6}
 span.s2 {color: #1428b9}
 span.s3 {color: #5f5f5f}
 span.s4 {color: #000000}
 span.s5 {color: #ff7826}
-span.s6 {color: #950606}
-span.s7 {color: #7d1875}
+span.s6 {color: #7d1875}
+span.s7 {color: #c62bba}
 span.Apple-tab-span {white-space:pre}
 </style>
 </head>
@@ -27,13 +27,18 @@ span.Apple-tab-span {white-space:pre}
 <p class="p1"><br></p>
 <p class="p2">(</p>
 <p class="p3"><span class="Apple-tab-span">	</span><span class="s1">var</span> rootpath = <span class="s2">PathName</span><span class="s3">(</span><span class="s2">Document</span><span class="s3">.</span>current<span class="s3">.</span>path<span class="s3">).</span>pathOnly<span class="s3">;</span></p>
-<p class="p4"><span class="s4"><span class="Apple-tab-span">	</span></span><span class="s5">~samples</span><span class="s4"> = </span>BufferRegistry<span class="s3">(</span><span class="s6">\samples</span><span class="s3">,</span><span class="s4"> s</span><span class="s3">);</span></p>
+<p class="p4"><span class="s4"><span class="Apple-tab-span">	</span></span><span class="s5">~br</span><span class="s4"> = </span><span class="s2">BufferRegistry</span><span class="s3">(</span>\samples<span class="s3">,</span><span class="s4"> </span>\default<span class="s3">);</span></p>
 <p class="p1"><span class="Apple-tab-span">	</span></p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="s3">(</span>rootpath +/+ <span class="s2">PathName</span><span class="s3">(</span><span class="s7">"_audio/yamaha mr-10"</span><span class="s3">)).</span>files<span class="s3">.</span>do<span class="s3">({</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s3">(</span>rootpath +/+ <span class="s2">PathName</span><span class="s3">(</span><span class="s6">"_audio/yamaha mr-10"</span><span class="s3">)).</span>files<span class="s3">.</span>do<span class="s3">({</span></p>
 <p class="p5"><span class="s4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>| path |</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s5">~samples</span><span class="s3">.</span>read<span class="s3">(</span>path<span class="s3">.</span>fileNameWithoutExtension<span class="s3">,</span> path<span class="s3">.</span>absolutePath<span class="s3">);</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="s5">~br</span><span class="s3">.</span>read<span class="s3">(</span>path<span class="s3">.</span>fileNameWithoutExtension<span class="s3">,</span> path<span class="s3">.</span>absolutePath<span class="s3">);</span></p>
 <p class="p2"><span class="s4"><span class="Apple-tab-span">	</span></span>});</p>
-<p class="p3"><span class="Apple-tab-span">	</span><span class="s5">~s</span> = <span class="s5">~samples</span><span class="s3">.</span>values<span class="s3">.</span>collect<span class="s3">(</span><span class="s2">_</span><span class="s3">.</span>bufnum<span class="s3">);</span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="s5">~s</span> = <span class="s5">~br</span><span class="s3">.</span>nums<span class="s3">;</span></p>
 <p class="p2">)</p>
+<p class="p1"><br></p>
+<p class="p3"><span class="s5">~br</span><span class="s3">.</span>values<span class="s3">[</span><span class="s7">5</span><span class="s3">].</span>play</p>
+<p class="p1"><br></p>
+<p class="p1"><br></p>
+<p class="p3"><span class="s5">~br</span><span class="s3">.</span>values<span class="s3">[</span><span class="s7">0</span><span class="s3">].</span>play</p>
 </body>
 </html>

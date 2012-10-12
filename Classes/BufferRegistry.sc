@@ -1,6 +1,6 @@
 BufferRegistry {
 	classvar <all;
-	var name, <server;
+	var name, <server, defaultChangedAction;
 	var dict, <constructorDict;
 	
 	*initClass {
@@ -9,10 +9,8 @@ BufferRegistry {
 	}
 	
 	*get {
-		| key, server |
+		| key=\default, server=\default |
 		var br;
-		key = key ? \default;
-		server = server ? Server.default;
 		
 		if (all[key].isNil, {
 			all[key] = super.new.init(server, key);
@@ -32,15 +30,21 @@ BufferRegistry {
 	}
 	
 	init {
-		| inServer, inName |
-		server = inServer ? Server.default;
-		name = inName;
-		
+		| inServer=\default, inName |
+		var defaultChangedFunc;
 		dict = Dictionary();
 		constructorDict = Dictionary();
-		
-		ServerBoot.add(this, server);
-		ServerQuit.add(this, server);	
+
+		defaultChangedAction = {
+			| oldServer, message, newServer |
+			if (message == \default, {
+				"default changed from % to %\n".postf(oldServer, newServer);
+				this.server_(\default);
+			});				
+		};
+
+		name = inName;		
+		this.server = inServer;	
 	}
 	
 	at {
@@ -49,30 +53,30 @@ BufferRegistry {
 	}
 	
 	read {
-		| key, path, startFrame=0, numFrames=(-1) |
-		constructorDict[key] = [\read, path, startFrame, numFrames];
+		| name, path, startFrame=0, numFrames=(-1) |
+		constructorDict[name] = [\read, path, startFrame, numFrames];
 		server.makeBundle(nil, {
-			if (dict[key].notNil, {
-				dict[key].allocRead(path, startFrame, numFrames);
-				dict[key].updateInfo();
+			if (dict[name].notNil, {
+				dict[name].allocRead(path, startFrame, numFrames);
+				dict[name].updateInfo();
 			}, {
-				dict[key] = Buffer.read(server, path, startFrame, numFrames);
+				dict[name] = Buffer.read(server, path, startFrame, numFrames);
 			});
 		});
-		^dict[key];
+		^dict[name];
 	}
 	
 	alloc {
-		| key, numFrames, numChannels=1 |
-		constructorDict[key] = [\alloc, numFrames, numChannels=1];
+		| name, numFrames, numChannels=1 |
+		constructorDict[name] = [\alloc, numFrames, numChannels=1];
 		server.makeBundle(nil, {
-			if (dict[key].notNil, {
-				dict[key].alloc(numFrames, numChannels);
+			if (dict[name].notNil, {
+				dict[name].alloc(numFrames, numChannels);
 			}, {
-				dict[key] = Buffer.alloc(server, numFrames, numChannels);
+				dict[name] = Buffer.alloc(server, numFrames, numChannels);
 			});
 		});
-		^dict[key];
+		^dict[name];
 	}
 	
 	remove {
@@ -100,11 +104,16 @@ BufferRegistry {
 		^dict.values();
 	}
 	
+	nums {
+		^dict.values.collect(_.bufnum);
+	}
+	
 	doOnServerBoot {
 		server.makeBundle(nil, {
-			this.keys().do({
+			this.constructorDict.keys().do({
 				| key |
 				var constructor;
+				dict[key].free;
 				dict[key] = nil;
 				constructor = constructorDict[key];
 				this.perform(constructor[0], key, *constructor[1..]);
@@ -115,26 +124,29 @@ BufferRegistry {
 	doOnServerQuit {
 	}
 	
-	clear {
-		server.makeBundle(nil, {
-			this.keys.do({
-				| key |
-				this.remove(key);
-			})
-		});
-	}
-	
 	server_{
-		| newServer |
+		| newServer, followDefault=false |
 		if (newServer != server, {
-			ServerBoot.remove(this, server);
-			ServerQuit.remove(this, server);
+			if (newServer == \default, {
+				this.server_(Server.default, true);
+				^this;
+			});
+			
+			if (server.notNil, {
+				ServerBoot.remove(this, server);
+				ServerQuit.remove(this, server);
+				
+				server.removeDependant(defaultChangedAction);
+			});
+
+			if (followDefault, {
+				newServer.addDependant(defaultChangedAction);
+			});
 
 			ServerBoot.add(this, newServer);
 			ServerQuit.add(this, newServer);
-			
+
 			server = newServer;
-			
 			if (server.serverRunning, {
 				this.doOnServerBoot();
 			});
