@@ -38,7 +38,6 @@ BufferRegistry {
 		defaultChangedAction = {
 			| oldServer, message, newServer |
 			if (message == \default, {
-				"default changed from % to %\n".postf(oldServer, newServer);
 				this.server_(\default);
 			});				
 		};
@@ -94,6 +93,10 @@ BufferRegistry {
 			^removed;
 		});
 		^nil;
+	}
+	
+	buffers {
+		^dict.values();
 	}
 	
 	keys {
