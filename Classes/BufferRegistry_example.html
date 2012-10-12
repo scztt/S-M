@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title></title>
+<meta name="Generator" content="Cocoa HTML Writer">
+<meta name="CocoaVersion" content="1138.51">
+<style type="text/css">
+p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'DejaVu Sans Mono'; color: #00771f; color: rgba(0, 119, 1, 0.6)}
+p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'DejaVu Sans Mono'; color: #00771f; color: rgba(0, 119, 1, 0.6); min-height: 14.0px}
+p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 9.0px Monaco; color: #00771f; color: rgba(0, 119, 1, 0.6)}
+span.s1 {text-decoration: underline}
+span.s2 {font: 12.0px 'DejaVu Sans Mono'}
+span.Apple-tab-span {white-space:pre}
+</style>
+</head>
+<body>
+<p class="p1">/*</p>
+<p class="p1"><b><span class="Apple-converted-space"> </span></b><b><span class="s1">BufferRegistry example</span></b></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span></span><b>Creating</b></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span></span>BufferRegistry();</p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span></span>BufferRegistry(\name); <span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>BufferRegistry(\name, server);</p>
+<p class="p2"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span></p>
+<p class="p1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>Names are unique, so calling BufferRegistry(\blah) either makes a new one or<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>returns the existing BR if it exists. BufferRegistry() defaults to \default,<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>which is generally the best to use.</p>
+<p class="p2"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span></p>
+<p class="p1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>BufferRegistry creates buffers via read or alloc commands, and gives them</p>
+<p class="p1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>a unique name. You can repeatedly assign and reassign buffers to the same</p>
+<p class="p1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>name, and they're intelligently swapped out without causing a bunch of<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>duplicates. The buffers are respawned intelligently when a server is booted or</p>
+<p class="p1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>rebooted. Buffers with one name will keep their bufnum for the duration of</p>
+<p class="p1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>the server being alive.</p>
+<p class="p2"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span></p>
+<p class="p1"><b><span class="Apple-converted-space"> </span>Using</b></p>
+<p class="p2"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span></p>
+<p class="p1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>~br = BufferRegistry();</p>
+<p class="p3"><span class="s2"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>~br.read(\b1, "</span>/Users/scott/Desktop/S&amp;M/_audio/yamaha mr-10/MR10ltom.wav<span class="s2">");</span></p>
+<p class="p3"><span class="s2"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>~br.read(\b2, "</span>/Users/scott/Desktop/S&amp;M/_audio/yamaha mr-10/MR10ltom.wav<span class="s2">");</span></p>
+<p class="p3"><span class="s2"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>~br.read(\b3, "</span>/Users/scott/Desktop/S&amp;M/_audio/yamaha mr-10/MR10ltom.wav<span class="s2">");</span></p>
+<p class="p2"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span></p>
+<p class="p1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>~br[\b3].play;</p>
+<p class="p1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>s.quit;</p>
+<p class="p1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>s.boot;</p>
+<p class="p1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>~br[\b3].play;</p>
+<p class="p2"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span></p>
+<p class="p1">*/</p>
+</body>
+</html>
